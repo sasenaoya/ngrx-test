@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        color: #666;
+    }
+}
+
+.pdf-list {
+    .pdf-row {
+        cursor: pointer;
+
+        &:hover {
+            background-color: #eee;
+        }
+    }
+}

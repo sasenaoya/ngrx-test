@@ -4,6 +4,10 @@ const app = express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
+// mongo
+import * as mongo from './mongo';
+mongo.connect();
+
 // router
 const router = express.Router();
 
@@ -12,6 +16,11 @@ router.use((req: Request, res: Response, next: NextFunction) => {
     console.log(`[${new Date().toISOString()}]`, req.method, req.url);
     next();
 });
+
+// api
+import { router as apiRouter } from './api-routes';
+router.use('/api', apiRouter);
+app.use(router);
 
 app.use(express.static('dist'));
 
