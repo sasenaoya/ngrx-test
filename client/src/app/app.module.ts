@@ -12,7 +12,7 @@ import { PdfModule } from './pdf/pdf.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

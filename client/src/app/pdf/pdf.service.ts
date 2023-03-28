@@ -16,6 +16,11 @@ export class PdfService {
     return this.http.get<IPdf[]>(`${this.url}/list`).pipe(map(res => this.convertServerToClientArray(res)));
   }
 
+  /** PDFの詳細情報取得 */
+  getPdf(id: string) {
+    return this.http.get<IPdf>(`${this.url}/${id}`).pipe(map(res => this.convertServerToClient(res)));
+  }
+
   /** PDFのアップロード */
   uploadPdf(file: File) {
     const formData = new FormData();

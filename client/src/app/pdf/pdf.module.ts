@@ -8,11 +8,19 @@ import { PdfRoutingModule } from './pdf-routing.module';
 import { PdfListComponent } from './pdf-list/pdf-list.component';
 import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PdfViewComponent } from './pdf-view/pdf-view.component';
+import { CommentListComponent } from './pdf-view/comment-list/comment-list.component';
+import { PageThumbnailsComponent } from './pdf-view/page-thumbnails/page-thumbnails.component';
+import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
 
 @NgModule({
   declarations: [
     PdfListComponent,
-    PdfUploadComponent
+    PdfUploadComponent,
+    PdfViewComponent,
+    CommentListComponent,
+    PageThumbnailsComponent,
+    ImageViewComponent,
   ],
   imports: [
     CommonModule,
