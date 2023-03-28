@@ -1,1 +1,5 @@
-<p>page-thumbnails works!</p>
+<div class="content">
+    <div *ngFor="let image of imageUrls; index as i" class="page" [class.selected]="i == page">
+        <img [src]="image" (click)="onImageClick(i)">
+    </div>
+</div>

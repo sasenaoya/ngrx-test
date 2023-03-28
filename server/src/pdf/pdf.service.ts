@@ -79,6 +79,20 @@ export async function getImage(req: Request, res: Response) {
     }
 }
 
+/** サムネイルを取得 */
+export async function getThumbnail(req: Request, res: Response) {
+    try {
+        const image = await Image.findById(req.params.id).select('thumbnailFullPath');
+        if (image) {
+            res.download(image.thumbnailFullPath);
+        } else {
+            res.sendStatus(404);
+        }
+    } catch (ex) {
+        error(res, ex);
+    }
+}
+
 /** PDFを画像に変換 */
 async function convertPdfToImage(tempFilePath: string, outputPath: string, pdf: IPdf) {
     try {

@@ -12,5 +12,8 @@ router.post('/upload', (req: Request, res: Response) => pdf.uploadPdf(req, res))
 /** 指定ページの画像を取得 */
 router.get('/image/:id', (req: Request, res: Response) => pdf.getImage(req, res));
 
+/** 指定ページのサムネイル画像を取得 */
+router.get('/thumbnail/:id', (req: Request, res: Response) => pdf.getThumbnail(req, res));
+
 /** PDFの情報を取得 */
 router.get('/:id', (req: Request, res: Response) => pdf.getPdf(req, res));

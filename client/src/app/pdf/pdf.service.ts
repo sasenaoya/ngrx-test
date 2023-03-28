@@ -32,6 +32,10 @@ export class PdfService {
     return this.http.get(`${this.url}/image/${id}`, { responseType: 'blob' });
   }
 
+  getThumbnail(id: string) {
+    return this.http.get(`${this.url}/thumbnail/${id}`, { responseType: 'blob' });
+  }
+
   private convertServerToClientArray(pdfs: IPdf[]) {
     for (const pdf of pdfs) {
       this.convertServerToClient(pdf);

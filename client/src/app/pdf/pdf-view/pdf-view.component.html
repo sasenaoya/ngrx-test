@@ -1,6 +1,6 @@
 <div class="content">
     <div class="left-panel">
-        <app-page-thumbnails></app-page-thumbnails>
+        <app-page-thumbnails [pdf]="pdf" [(page)]="currentPageNumber"></app-page-thumbnails>
     </div>
     <div class="preview">
         <app-image-view [pdf]="pdf" [page]="currentPageNumber" [comments]="pdf?.comments" [(selectedComment)]="selectedComment"></app-image-view>

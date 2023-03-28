@@ -1,0 +1,24 @@
+.content {
+    background-color: #aaa;
+    padding: 10px;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    .page {
+        &:not(:first-child) {
+            margin-top: 10px;
+        }
+
+        &.selected {
+            img {
+                outline: 3px solid rgb(3 189 189);
+            }
+        }
+
+        img {
+            width: 100px;
+            cursor: pointer;
+        }
+    }
+}
