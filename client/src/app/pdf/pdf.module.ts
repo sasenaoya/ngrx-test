@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { PdfRoutingModule } from './pdf-routing.module';
 import { PdfListComponent } from './pdf-list/pdf-list.component';
 import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
   imports: [
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatTableModule,
     MatButtonModule,

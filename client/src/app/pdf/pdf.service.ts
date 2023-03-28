@@ -16,6 +16,13 @@ export class PdfService {
     return this.http.get<IPdf[]>(`${this.url}/list`).pipe(map(res => this.convertServerToClientArray(res)));
   }
 
+  /** PDFのアップロード */
+  uploadPdf(file: File) {
+    const formData = new FormData();
+    formData.set('file', file, file.name);
+    return this.http.post(`${this.url}/upload`, formData);
+  }
+
   private convertServerToClientArray(pdfs: IPdf[]) {
     for (const pdf of pdfs) {
       this.convertServerToClient(pdf);

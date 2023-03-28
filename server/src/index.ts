@@ -1,6 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express';
 const app = express();
 
+import fileUpload from 'express-fileupload';
+const temp_dir = process.env.TEMP_DIR || '/home/node/tmp/';
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : temp_dir,
+    defCharset: 'utf8',
+    defParamCharset: 'utf8',
+}));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 

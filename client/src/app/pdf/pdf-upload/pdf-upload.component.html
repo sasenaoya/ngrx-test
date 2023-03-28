@@ -1,1 +1,8 @@
-<p>pdf-upload works!</p>
+<div class="content">
+    <form [formGroup]="formGroup" (submit)="onSubmit()">
+        <input type="file" formControlName="file" accept="application/pdf" (change)="onFileChange($event)">
+        <div class="form-footer">
+            <button mat-button color="primary" [disabled]="formGroup.invalid">アップロード</button>
+        </div>
+    </form>
+</div>
