@@ -3,9 +3,9 @@
         <app-page-thumbnails [pdf]="pdf" [(page)]="currentPageNumber"></app-page-thumbnails>
     </div>
     <div class="preview">
-        <app-image-view [pdf]="pdf" [page]="currentPageNumber" [comments]="pdf?.comments" [(selectedComment)]="selectedComment"></app-image-view>
+        <app-image-view [pdf]="pdf" [page]="currentPageNumber" [comments]="pdf?.comments" [(selectedComment)]="selectedComment" (commentAdded)="onCommentAdded($event)"></app-image-view>
     </div>
     <div class="right-panel">
-        <app-comment-list></app-comment-list>
+        <app-comment-list [pdf]="pdf" [page]="currentPageNumber" [comments]="pdf?.comments" [(selectedComment)]="selectedComment" (commentRemoved)="onCommentRemoved($event)"></app-comment-list>
     </div>
 </div>

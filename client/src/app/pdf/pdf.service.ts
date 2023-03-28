@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IPdf } from './pdf.model';
+import { IComment, IPdf } from './pdf.model';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -34,6 +34,14 @@ export class PdfService {
 
   getThumbnail(id: string) {
     return this.http.get(`${this.url}/thumbnail/${id}`, { responseType: 'blob' });
+  }
+
+  addComment(id: string, text: string, page: number, x: number, y: number, w: number, h: number) {
+    return this.http.post<IComment>(`${this.url}/comment/${id}`, { text, page, x, y, w, h });
+  }
+
+  removeComment(pdfId: string, commentId: string) {
+    return this.http.delete(`${this.url}/comment/${pdfId}/${commentId}`);
   }
 
   private convertServerToClientArray(pdfs: IPdf[]) {

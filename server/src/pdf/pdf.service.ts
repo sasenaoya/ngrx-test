@@ -3,7 +3,7 @@ import { execSync, spawn } from 'child_process';
 import { Request, Response } from 'express';
 import {} from 'express-fileupload';
 import { forkJoin, firstValueFrom } from 'rxjs';
-import { IImage, Image, IPdf, Pdf, Status } from './pdf.model';
+import { IComment, Comment, IImage, Image, IPdf, Pdf, Status } from './pdf.model';
 
 // PDFアップロード先
 const pdfDir = process.env.PDF_DIR || '/home/node/pdf';
@@ -90,6 +90,43 @@ export async function getThumbnail(req: Request, res: Response) {
         }
     } catch (ex) {
         error(res, ex);
+    }
+}
+
+/** コメントの作成 */
+export async function addComment(req: Request, res: Response) {
+    let comment;
+    try {
+        const now = new Date();
+        comment = new Comment({
+            pdf: req.params.id,
+            text: req.body.text,
+            page: req.body.page,
+            x: req.body.x,
+            y: req.body.y,
+            w: req.body.w,
+            h: req.body.h,
+            createdDate: now,
+            modifiedDate: now,
+        });
+        await comment.save();
+
+        res.send(comment);
+    } catch (ex) {
+        error(res, ex);
+        return;
+    }
+}
+
+/** コメントの削除 */
+export async function removeComment(req: Request, res: Response) {
+    try {
+        // await Comment.findByIdAndDelete(req.params.commentId);
+        await Comment.findByIdAndDelete(req.params.commentId);
+        res.sendStatus(204);
+    } catch (ex) {
+        error(res, ex);
+        return;
     }
 }
 

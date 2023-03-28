@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Subject, takeUntil } from 'rxjs';
+import { AddCommentDialogComponent } from '../add-comment-dialog/add-comment-dialog.component';
 import { IComment, IPdf } from '../../pdf.model';
 import { PdfService } from '../../pdf.service';
 
@@ -36,7 +38,7 @@ export class ImageViewComponent implements OnDestroy, OnChanges {
 
   destroySubject$ = new Subject<void>();
 
-  constructor(private sanitizer: DomSanitizer, private pdfService: PdfService) {}
+  constructor(private sanitizer: DomSanitizer, private dialog: MatDialog, private pdfService: PdfService) {}
 
   ngOnDestroy(): void {
     this.destroySubject$.next();
@@ -62,6 +64,20 @@ export class ImageViewComponent implements OnDestroy, OnChanges {
  * コメント作成のダイアログを表示し、クリック位置にコメントを追加する
  */
   onImageClick(e: MouseEvent) {
+    if (this.pdf?._id && this.page !== undefined && this.imageElem) {
+      const id = this.pdf._id;
+      const r = this.imageElem.nativeElement.getBoundingClientRect();
+      const page = this.page;
+
+      const dialogRef = this.dialog.open(AddCommentDialogComponent, { data: undefined });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const x = e.clientX - r.x;
+          const y = e.clientY - r.y;
+          this.pdfService.addComment(id, result, page, x, y, 100, 100).subscribe(res => this.commentAdded.emit(res));
+        }
+      });
+    }
   }
 
   /**

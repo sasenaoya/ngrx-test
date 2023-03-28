@@ -20,4 +20,29 @@ export class PdfViewComponent {
       });
     });
   }
+
+  /** コメントの追加 */
+  onCommentAdded(comment: IComment) {
+    if (this.pdf) {
+      if (Array.isArray(this.pdf.comments)) {
+        this.pdf.comments = [...this.pdf.comments, comment];
+      } else {
+        this.pdf.comments = [comment];
+      }
+      this.selectedComment = comment;
+    }
+  }
+
+  /** コメントの削除 */
+  onCommentRemoved(comment: IComment) {
+    if (this.pdf) {
+      if (Array.isArray(this.pdf.comments)) {
+        this.pdf.comments = this.pdf.comments.filter(c => c !== comment);
+
+        if (this.selectedComment === comment) {
+          this.selectedComment = undefined;
+        }
+      }
+    }
+  }
 }

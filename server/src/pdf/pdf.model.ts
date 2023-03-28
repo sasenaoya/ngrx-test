@@ -68,6 +68,7 @@ commentSchema.post('deleteOne', { document: true }, async function (comment) {
 });
 
 commentSchema.post('findOneAndDelete', async function (comment) {
+    console.log('delete comment', comment);
     await postDelete(comment.pdf, comment._id);
 });
 

@@ -1,0 +1,24 @@
+.content {
+    width: 15rem;
+    height: 100%;
+    padding: 5px;
+    overflow-y: auto;
+}
+
+.mdc-card {
+    margin-top: 5px;
+    cursor: pointer;
+
+    &.selected {
+        outline: 2px solid rgb(140, 163, 238);
+    }
+    .close-button {
+        float: right;
+    }
+    .subtitle {
+        width: 12rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

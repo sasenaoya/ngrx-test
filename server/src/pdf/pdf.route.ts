@@ -17,3 +17,9 @@ router.get('/thumbnail/:id', (req: Request, res: Response) => pdf.getThumbnail(r
 
 /** PDFの情報を取得 */
 router.get('/:id', (req: Request, res: Response) => pdf.getPdf(req, res));
+
+/** コメントを追加 */
+router.post('/comment/:id', (req: Request, res: Response) => pdf.addComment(req, res));
+
+/** コメントを削除 */
+router.delete('/comment/:pdfId/:commentId', (req: Request, res: Response) => pdf.removeComment(req, res));

@@ -5,6 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { PdfRoutingModule } from './pdf-routing.module';
 import { PdfListComponent } from './pdf-list/pdf-list.component';
 import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
@@ -13,6 +16,7 @@ import { PdfViewComponent } from './pdf-view/pdf-view.component';
 import { CommentListComponent } from './pdf-view/comment-list/comment-list.component';
 import { PageThumbnailsComponent } from './pdf-view/page-thumbnails/page-thumbnails.component';
 import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
+import { AddCommentDialogComponent } from './pdf-view/add-comment-dialog/add-comment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,7 @@ import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
     CommentListComponent,
     PageThumbnailsComponent,
     ImageViewComponent,
+    AddCommentDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +36,9 @@ import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
     MatTableModule,
     MatButtonModule,
     MatDialogModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     PdfRoutingModule,
   ]
 })

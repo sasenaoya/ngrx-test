@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>コメントの追加</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field class="comment">
+            <mat-label>コメント</mat-label>
+            <textarea formControlName="comment" matInput cdkTextareaAutosize cdkAutosizeMinRows="5" cdkAutosizeMaxRows="15"></textarea>
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="formGroup.controls['comment'].value" cdkFocusInitial [disabled]="formGroup.invalid">Save</button>
+</div>

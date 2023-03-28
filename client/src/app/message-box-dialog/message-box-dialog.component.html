@@ -1,0 +1,9 @@
+<h1 *ngIf="options?.title" mat-dialog-title>{{options.title}}</h1>
+
+<div mat-dialog-content>
+    {{options.message}}
+</div>
+
+<div mat-dialog-actions align="end">
+  <button *ngFor="let button of options.buttons" mat-button [mat-dialog-close]="button">{{button.text}}</button>
+</div>

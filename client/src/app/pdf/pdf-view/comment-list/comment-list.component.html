@@ -1,1 +1,18 @@
-<p>comment-list works!</p>
+<div class="content">
+    <mat-card *ngFor="let comment of filteredComments" [class.selected]="selectedComment == comment" (click)="onCommentClick(comment)">
+        <mat-card-header>
+            <mat-card-title></mat-card-title>
+            <mat-card-subtitle>
+                <div class="subtitle">
+                    <div>{{comment.modifiedDate | date: 'yyyy/MM/dd HH:mm:ss'}}</div>
+                    <div><button mat-icon-button (click)="onRemove(comment)"><mat-icon fontIcon="close"></mat-icon></button></div>
+                </div>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>{{comment.text}}</mat-card-content>
+        <mat-card-actions align="end">
+            <!-- <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+    </mat-card>
+</div>
