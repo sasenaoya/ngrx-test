@@ -1,8 +1,9 @@
 import * as fs from 'fs';
+import { execSync, spawn } from 'child_process';
 import { Request, Response } from 'express';
+import {} from 'express-fileupload';
 import { forkJoin, firstValueFrom } from 'rxjs';
 import { IImage, Image, IPdf, Pdf, Status } from './pdf.model';
-import { execSync, spawn } from 'child_process';
 
 // PDFアップロード先
 const pdfDir = process.env.PDF_DIR || '/home/node/pdf';
@@ -10,6 +11,16 @@ const pdfDir = process.env.PDF_DIR || '/home/node/pdf';
 function error(res: Response, ex: any) {
     console.log(ex);
     res.sendStatus(500);
+}
+
+/** PDFの情報を取得 */
+export async function getPdf(req: Request, res: Response) {
+    try {
+        const pdf = await Pdf.findById(req.params.id).select('+comments').populate('comments').populate('images');
+        res.send(pdf);
+    } catch (ex) {
+        error(res, ex);
+    }
 }
 
 /** PDFの一覧を取得 */
@@ -51,6 +62,20 @@ export async function uploadPdf(req: Request, res: Response) {
         convertPdfToImage(req.files.file.tempFilePath, outputPath, pdf);
     } else {
         res.sendStatus(400);
+    }
+}
+
+/** 画像を取得 */
+export async function getImage(req: Request, res: Response) {
+    try {
+        const image = await Image.findById(req.params.id).select('fullPath');
+        if (image) {
+            res.download(image.fullPath);
+        } else {
+            res.sendStatus(404);
+        }
+    } catch (ex) {
+        error(res, ex);
     }
 }
 

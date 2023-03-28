@@ -19,7 +19,8 @@ export interface IComment {
 
 export interface IImage {
     _id?: string;
-    fullPath?: string;
+    width?: number;
+    height?: number;
 }
 
 export interface IPdf {

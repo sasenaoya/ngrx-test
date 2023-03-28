@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { PdfRoutingModule } from './pdf-routing.module';
 import { PdfListComponent } from './pdf-list/pdf-list.component';
 import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
@@ -29,6 +30,7 @@ import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
     MatIconModule,
     MatTableModule,
     MatButtonModule,
+    MatDialogModule,
     PdfRoutingModule,
   ]
 })

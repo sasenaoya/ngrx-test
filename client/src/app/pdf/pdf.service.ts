@@ -28,6 +28,10 @@ export class PdfService {
     return this.http.post(`${this.url}/upload`, formData);
   }
 
+  getImage(id: string) {
+    return this.http.get(`${this.url}/image/${id}`, { responseType: 'blob' });
+  }
+
   private convertServerToClientArray(pdfs: IPdf[]) {
     for (const pdf of pdfs) {
       this.convertServerToClient(pdf);

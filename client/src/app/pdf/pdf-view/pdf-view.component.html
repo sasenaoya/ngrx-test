@@ -3,7 +3,7 @@
         <app-page-thumbnails></app-page-thumbnails>
     </div>
     <div class="preview">
-        <app-image-view></app-image-view>
+        <app-image-view [pdf]="pdf" [page]="currentPageNumber" [comments]="pdf?.comments" [(selectedComment)]="selectedComment"></app-image-view>
     </div>
     <div class="right-panel">
         <app-comment-list></app-comment-list>

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPdf } from '../pdf.model';
+import { IComment, IPdf } from '../pdf.model';
 import { PdfService } from '../pdf.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { PdfService } from '../pdf.service';
 export class PdfViewComponent {
   pdf?: IPdf;
   currentPageNumber = 0;
-  selectedComment?: Comment;
+  selectedComment?: IComment;
 
   constructor(route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef, pdfService: PdfService) {
     route.params.subscribe(params => {
