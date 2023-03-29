@@ -8,15 +8,20 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 import { PdfRoutingModule } from './pdf-routing.module';
 import { PdfListComponent } from './pdf-list/pdf-list.component';
 import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { PdfViewComponent } from './pdf-view/pdf-view.component';
 import { CommentListComponent } from './pdf-view/comment-list/comment-list.component';
 import { PageThumbnailsComponent } from './pdf-view/page-thumbnails/page-thumbnails.component';
 import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
 import { AddCommentDialogComponent } from './pdf-view/add-comment-dialog/add-comment-dialog.component';
+import { pdfReducer } from './state/set-pdf.reducer';
+import { setPageNumberReducer } from './state/set-page-number.reducer';
+import { commentsReducer } from './state/comments.reducer';
+import { setSelectedCommentReducer } from './state/set-selected-comment.reducer';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,13 @@ import { AddCommentDialogComponent } from './pdf-view/add-comment-dialog/add-com
     MatFormFieldModule,
     MatInputModule,
     PdfRoutingModule,
+
+    StoreModule.forRoot({
+      pdf: pdfReducer,
+      pageNumber: setPageNumberReducer,
+      comments: commentsReducer,
+      selectedComment: setSelectedCommentReducer,
+    }),
   ]
 })
 export class PdfModule { }

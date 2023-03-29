@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Subject, take, takeUntil, timer } from 'rxjs';
 import { IPdf } from '../../pdf.model';
+import { PdfFacade } from '../../pdf.facade';
 import { PdfService } from '../../pdf.service';
 
 @Component({
@@ -11,11 +12,10 @@ import { PdfService } from '../../pdf.service';
 })
 export class PageThumbnailsComponent implements  OnInit, OnDestroy, OnChanges {
   /** 表示するPDF */
-  @Input() pdf?: IPdf;
+  @Input() pdf: IPdf = {};
 
   /** 現在選択されているページ */
   @Input() page: number = 0;
-  @Output() pageChange = new EventEmitter<number>();
 
   /** サムネイル画像の一覧 */
   imageUrls = new Array<SafeUrl | undefined>();
@@ -23,7 +23,7 @@ export class PageThumbnailsComponent implements  OnInit, OnDestroy, OnChanges {
   destroySubject$ = new Subject<void>();
 
   // コンストラクタ
-  constructor(private sanitizer: DomSanitizer, private pdfService: PdfService) {}
+  constructor(private sanitizer: DomSanitizer, private pdfService: PdfService, private pdfFacade: PdfFacade) {}
 
   ngOnInit(): void {
   }
@@ -44,16 +44,16 @@ export class PageThumbnailsComponent implements  OnInit, OnDestroy, OnChanges {
    * 表示するページを変更する
    */
   onImageClick(i: number) {
-    this.pageChange.emit(i);
+    this.pdfFacade.setPageNumber(i);
   }
 
   /**
    * すべてのページのサムネイル画像を取得する
    */
   private getThumbnails() {
-    if (this.pdf?._id && Array.isArray(this.pdf?.images)) {
-      this.imageUrls = new Array(this.pdf?.images.length);
-      const imageIds = this.pdf.images.map(i => <string>i._id);
+    if (this.pdf._id && Array.isArray(this.pdf.images)) {
+      this.imageUrls = new Array(this.pdf.images.length);
+      const imageIds = this.pdf.images.map(i => i._id!);
 
       // 一気に取得するとデバッグ環境だとすべて取得するまで何もできなくなるので、タイマーを挟む
       timer(1, 10).pipe(take(this.pdf.images.length), takeUntil(this.destroySubject$)).subscribe(i => {
