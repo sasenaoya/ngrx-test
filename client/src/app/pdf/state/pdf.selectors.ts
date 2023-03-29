@@ -1,10 +1,11 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { IPdf, IComment } from '../pdf.model';
+import { CommentsState } from './comments.reducer';
+import { PdfState } from './pdf.reducer';
 
-export const selectPdf = createFeatureSelector<IPdf>('pdf');
+const selectPdfState = createFeatureSelector<PdfState>('pdf');
+export const selectPdf = createSelector(selectPdfState, state => state.pdf);
+export const selectCurrentPageNumber = createSelector(selectPdfState, state => state.currentPageNumber);
 
-export const selectPageNumber = createFeatureSelector<number>('pageNumber');
-
-export const selectComments = createFeatureSelector<IComment[]>('comments');
-
-export const selectSelectedComment = createFeatureSelector<IComment>('selectedComment');
+const selectCommentsState = createFeatureSelector<CommentsState>('comments');
+export const selectComments = createSelector(selectCommentsState, state => state.comments);
+export const selectSelectedComment = createSelector(selectCommentsState, state => state.selectedComment);

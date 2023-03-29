@@ -16,16 +16,16 @@ export class ImageViewComponent implements OnDestroy, OnChanges {
   @ViewChild('image') imageElem?: ElementRef;
 
   /** 表示するPDF */
-  @Input() pdf: IPdf = {};
+  @Input() pdf?: IPdf;
+
+  /** 表示するページ */
+  @Input() page?: number;
 
   /** コメント一覧 */
   @Input() comments: IComment[] = [];
 
-  /** 表示するページ */
-  @Input() page: number = 0;
-
   /** 選択中のコメント */
-  @Input() selectedComment: IComment = {};
+  @Input() selectedComment?: IComment;
 
   /** ページ変更時に毎回画像をロードすると遅いので、一度取得した画像はそのまま保持しておく */
   imageUrls: SafeUrl[] = [];
@@ -44,7 +44,7 @@ export class ImageViewComponent implements OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['pdf']) {
-      this.imageUrls = Array.isArray(this.pdf.images) ? new Array(this.pdf.images.length) : [];
+      this.imageUrls = this.pdf?.images?.length ? new Array(this.pdf.images.length) : [];
     }
 
     if (changes['pdf'] || changes['page']) {
@@ -61,7 +61,7 @@ export class ImageViewComponent implements OnDestroy, OnChanges {
  * コメント作成のダイアログを表示し、クリック位置にコメントを追加する
  */
   onImageClick(e: MouseEvent) {
-    if (this.pdf._id && this.imageElem) {
+    if (this.pdf?._id && this.page !== undefined && this.imageElem) {
       const id = this.pdf._id;
       const r = this.imageElem.nativeElement.getBoundingClientRect();
       const page = this.page;
@@ -87,7 +87,7 @@ export class ImageViewComponent implements OnDestroy, OnChanges {
 
   /** プレビュー画像を取得する */
   private getImage() {
-    if (this.pdf._id && this.pdf.images) {
+    if (this.pdf?._id && this.page !== undefined && this.pdf.images) {
       const page = this.page;
 
       // まだこのページの画像を取得していない場合、取得しにいく

@@ -11,16 +11,16 @@ import { IComment, IPdf } from '../../pdf.model';
 })
 export class CommentListComponent implements OnChanges {
   /** 表示しているPDF */
-  @Input() pdf: IPdf = {};
+  @Input() pdf?: IPdf;
 
   /** 表示しているページ */
-  @Input() page: number = 0;
+  @Input() page?: number;
 
   /** コメント一覧 */
   @Input() comments = new Array<IComment>();
 
   /** 選択中のコメント */
-  @Input() selectedComment: IComment = {};
+  @Input() selectedComment?: IComment;
 
   /** パネルに表示するコメント一覧 */
   filteredComments = new Array<IComment>();
@@ -37,12 +37,12 @@ export class CommentListComponent implements OnChanges {
    * コメントの削除ボタンがクリックされた
    */
   onRemove(comment: IComment) {
-    if (this.pdf._id && comment._id) {
+    if (this.pdf?._id && comment._id) {
       const pdfId = this.pdf._id;
       const commentId = comment._id;
       this.messageBoxService.open({ message: 'コメントを削除します。', buttons: [MessageBoxButtons.Cancel, MessageBoxButtons.Ok] }).afterClosed().subscribe(res => {
         if (res === MessageBoxButtons.Ok) {
-          this.pdfService.removeComment(pdfId, commentId).subscribe(() => this.pdfFacade.removeComment(comment._id!));
+          this.pdfService.removeComment(pdfId, commentId).subscribe(() => this.pdfFacade.removeComment(commentId));
         }
       });
     }

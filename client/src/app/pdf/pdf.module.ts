@@ -18,10 +18,8 @@ import { CommentListComponent } from './pdf-view/comment-list/comment-list.compo
 import { PageThumbnailsComponent } from './pdf-view/page-thumbnails/page-thumbnails.component';
 import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
 import { AddCommentDialogComponent } from './pdf-view/add-comment-dialog/add-comment-dialog.component';
-import { pdfReducer } from './state/set-pdf.reducer';
-import { setPageNumberReducer } from './state/set-page-number.reducer';
+import { pdfReducer } from './state/pdf.reducer';
 import { commentsReducer } from './state/comments.reducer';
-import { setSelectedCommentReducer } from './state/set-selected-comment.reducer';
 
 @NgModule({
   declarations: [
@@ -48,9 +46,7 @@ import { setSelectedCommentReducer } from './state/set-selected-comment.reducer'
 
     StoreModule.forRoot({
       pdf: pdfReducer,
-      pageNumber: setPageNumberReducer,
       comments: commentsReducer,
-      selectedComment: setSelectedCommentReducer,
     }),
   ]
 })

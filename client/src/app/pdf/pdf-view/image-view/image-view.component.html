@@ -1,5 +1,5 @@
 <div class="content">
-    <img #image class="pdf" [src]="imageUrls[page]" (click)="onImageClick($event)">
+    <img #image class="pdf" [src]="page !== undefined ? imageUrls[page] : undefined" (click)="onImageClick($event)">
     <div *ngFor="let comment of filteredComments" class="sticky-note" [class.selected]="selectedComment == comment"
         [style.left.px]="comment.x" [style.top.px]="comment.y" [style.width.px]="comment.w" [style.height.px]="comment.h"
         (click)="onNoteClick(comment)"
