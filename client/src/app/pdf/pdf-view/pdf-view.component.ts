@@ -15,11 +15,9 @@ export class PdfViewComponent {
   comments$ = this.pdfFacade.comments$;
   selectedComment$ = this.pdfFacade.selectedComment$;
 
-  constructor(route: ActivatedRoute, private pdfService: PdfService, private pdfFacade: PdfFacade) {
+  constructor(route: ActivatedRoute, private pdfFacade: PdfFacade) {
     route.params.subscribe(params => {
-      this.pdfService.getPdf(params['id']).subscribe(pdf => {
-        this.pdfFacade.setPdf(pdf);
-      });
+      this.pdfFacade.loadPdf(params['id']);
     });
   }
 }

@@ -14,8 +14,8 @@ export const initialState: CommentsState = {
 export const commentsReducer = createReducer(
     initialState,
     on(commentsActions.setComments, (state, { comments }) => ({ ...state, comments })),
-    on(commentsActions.addComment, (state, { comment }) => ({ comments: [...state.comments, comment], selectedComment: comment })),
-    on(commentsActions.removeComment, (state, { commentId }) => ({
+    on(commentsActions.addCommentSuccess, (state, { comment }) => ({ comments: [...state.comments, comment], selectedComment: comment })),
+    on(commentsActions.removeCommentSuccess, (state, { commentId }) => ({
         comments: state.comments.filter(c => c._id !== commentId),
         selectedComment: state.selectedComment?._id === commentId ? undefined : state.selectedComment,
     })),

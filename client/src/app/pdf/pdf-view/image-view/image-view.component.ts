@@ -67,11 +67,11 @@ export class ImageViewComponent implements OnDestroy, OnChanges {
       const page = this.page;
 
       const dialogRef = this.dialog.open(AddCommentDialogComponent, { data: undefined });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
+      dialogRef.afterClosed().subscribe(text => {
+        if (text) {
           const x = e.clientX - r.x;
           const y = e.clientY - r.y;
-          this.pdfService.addComment(id, result, page, x, y, 100, 100).subscribe(res => this.pdfFacade.addComment(res));
+          this.pdfFacade.addComment(id, { text, page, x, y, w: 100, h: 100 });
         }
       });
     }

@@ -36,8 +36,8 @@ export class PdfService {
     return this.http.get(`${this.url}/thumbnail/${id}`, { responseType: 'blob' });
   }
 
-  addComment(id: string, text: string, page: number, x: number, y: number, w: number, h: number) {
-    return this.http.post<IComment>(`${this.url}/comment/${id}`, { text, page, x, y, w, h });
+  addComment(id: string, comment: IComment) {
+    return this.http.post<IComment>(`${this.url}/comment/${id}`, comment);
   }
 
   removeComment(pdfId: string, commentId: string) {
