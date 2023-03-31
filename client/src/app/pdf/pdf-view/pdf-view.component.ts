@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PdfFacade } from '../pdf.facade';
 import { IComment, IPdf } from '../pdf.model';
@@ -9,7 +9,7 @@ import { PdfService } from '../pdf.service';
   templateUrl: './pdf-view.component.html',
   styleUrls: ['./pdf-view.component.scss']
 })
-export class PdfViewComponent {
+export class PdfViewComponent implements OnDestroy {
   pdf$ = this.pdfFacade.pdf$;
   currentPageNumber$ = this.pdfFacade.currentPageNumber$;
   comments$ = this.pdfFacade.comments$;
@@ -21,5 +21,9 @@ export class PdfViewComponent {
         this.pdfFacade.setPdf(pdf);
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.pdfFacade.setPdf(undefined);
   }
 }

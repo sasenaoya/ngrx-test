@@ -15,12 +15,11 @@ export class PdfFacade {
   comments$ = this.store.select(selectComments);
   selectedComment$ = this.store.select(selectSelectedComment);
 
-  setPdf(pdf: IPdf) {
+  setPdf(pdf?: IPdf) {
     this.store.dispatch( pdfActions.setPdf({pdf}) );
-    this.setComments(pdf.comments ? pdf.comments : []);
   }
 
-  setCurrentPageNumber(pageNumber: number) {
+  setCurrentPageNumber(pageNumber?: number) {
     this.store.dispatch(pdfActions.setCurrentPageNumber({pageNumber}));
   }
 
