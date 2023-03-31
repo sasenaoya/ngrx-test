@@ -10,7 +10,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 import { PdfRoutingModule } from './pdf-routing.module';
 import { PdfListComponent } from './pdf-list/pdf-list.component';
 import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
@@ -21,8 +20,6 @@ import { ImageViewComponent } from './pdf-view/image-view/image-view.component';
 import { AddCommentDialogComponent } from './pdf-view/add-comment-dialog/add-comment-dialog.component';
 import { pdfReducer } from './state/pdf.reducer';
 import { commentsReducer } from './state/comments.reducer';
-import { PdfEffects } from './state/pdf.effects';
-import { CommentsEffects } from './state/comments.effects';
 
 @NgModule({
   declarations: [
@@ -51,7 +48,6 @@ import { CommentsEffects } from './state/comments.effects';
       pdf: pdfReducer,
       comments: commentsReducer,
     }),
-    EffectsModule.forRoot([PdfEffects, CommentsEffects]),
   ]
 })
 export class PdfModule { }

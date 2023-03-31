@@ -42,7 +42,7 @@ export class CommentListComponent implements OnChanges {
       const commentId = comment._id;
       this.messageBoxService.open({ message: 'コメントを削除します。', buttons: [MessageBoxButtons.Cancel, MessageBoxButtons.Ok] }).afterClosed().subscribe(res => {
         if (res === MessageBoxButtons.Ok) {
-          this.pdfFacade.removeComment(pdfId, commentId);
+          this.pdfService.removeComment(pdfId, commentId).subscribe(() => this.pdfFacade.removeComment(commentId));
         }
       });
     }

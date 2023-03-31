@@ -15,12 +15,9 @@ export class PdfFacade {
   comments$ = this.store.select(selectComments);
   selectedComment$ = this.store.select(selectSelectedComment);
 
-  loadPdf(id: string) {
-    this.store.dispatch( pdfActions.load({id}) );
-  }
-
   setPdf(pdf: IPdf) {
     this.store.dispatch( pdfActions.setPdf({pdf}) );
+    this.setComments(pdf.comments ? pdf.comments : []);
   }
 
   setCurrentPageNumber(pageNumber: number) {
@@ -31,12 +28,12 @@ export class PdfFacade {
     this.store.dispatch( commentsActions.setComments({comments}) );
   }
 
-  addComment(pdfId: string, comment: IComment) {
-    this.store.dispatch( commentsActions.addComment({pdfId, comment}) );
+  addComment(comment: IComment) {
+    this.store.dispatch( commentsActions.addComment({comment}) );
   }
 
-  removeComment(pdfId: string, commentId: string) {
-    this.store.dispatch( commentsActions.removeComment({pdfId, commentId}) );
+  removeComment(commentId: string) {
+    this.store.dispatch( commentsActions.removeComment({commentId}) );
   }
 
   setSelectedComment(comment?: IComment) {
